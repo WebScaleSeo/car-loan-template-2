@@ -1,0 +1,492 @@
+/* ── HowItWorks — Organic Flowing · Radial Decorative · Card Flip Entrance · Multi-Shadow ── */
+
+/* ── Section base ──────────────────────────────────────────────────────── */
+.hiw-section {
+  position: relative;
+  padding: 6rem 0 7rem;
+  background-color: var(--bg-page);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ── Dot-grid pattern layer ─────────────────────────────────────────────── */
+.hiw-bg-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(15, 52, 96, 0.12) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Warm radial glow — organic flowing mood ────────────────────────────── */
+.hiw-bg-warm {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 75% 55% at 50% 35%, rgba(255, 248, 235, 0.88) 0%, transparent 68%),
+    radial-gradient(ellipse 45% 45% at 12% 85%, rgba(11, 122, 75, 0.05) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 50% at 88% 70%, rgba(15, 52, 96, 0.06) 0%, transparent 55%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Decorative concentric rings — radial/circular spatial direction ──────── */
+.hiw-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hiw-ring--outer {
+  width: 700px;
+  height: 700px;
+  border: 1px dashed rgba(15, 52, 96, 0.09);
+  animation: hiw-ring-breathe 14s ease-in-out infinite;
+}
+
+.hiw-ring--inner {
+  width: 460px;
+  height: 460px;
+  border: 1.5px solid rgba(11, 122, 75, 0.08);
+  animation: hiw-ring-breathe 10s ease-in-out infinite reverse;
+}
+
+@keyframes hiw-ring-breathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  50%       { transform: translate(-50%, -50%) scale(1.04); opacity: 0.6; }
+}
+
+/* ── Floating blobs with blend-mode overlay ──────────────────────────────── */
+.hiw-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hiw-blob--1 {
+  width: 440px;
+  height: 440px;
+  top: -160px;
+  left: -160px;
+  background: radial-gradient(circle, rgba(15, 52, 96, 0.06) 0%, transparent 70%);
+  mix-blend-mode: multiply;
+  animation: hiw-blob-drift 11s ease-in-out infinite alternate;
+}
+
+.hiw-blob--2 {
+  width: 360px;
+  height: 360px;
+  bottom: -120px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(11, 122, 75, 0.07) 0%, transparent 70%);
+  mix-blend-mode: multiply;
+  animation: hiw-blob-drift 15s ease-in-out infinite alternate-reverse;
+}
+
+.hiw-blob--3 {
+  width: 220px;
+  height: 220px;
+  top: 40%;
+  right: 8%;
+  background: radial-gradient(circle, rgba(26, 82, 118, 0.05) 0%, transparent 60%);
+  mix-blend-mode: overlay;
+  animation: hiw-blob-pulse 8s ease-in-out infinite;
+}
+
+@keyframes hiw-blob-drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(28px, 18px) scale(1.07); }
+}
+
+@keyframes hiw-blob-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.1); }
+}
+
+/* ── Inner wrapper ──────────────────────────────────────────────────────── */
+.hiw-inner {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Section header ─────────────────────────────────────────────────────── */
+.hiw-header {
+  text-align: center;
+  margin-bottom: 5rem;
+  animation: hiw-fade-up 0.7s ease both;
+}
+
+.hiw-label-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.hiw-label-line {
+  width: 32px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+  border-radius: 2px;
+}
+
+.hiw-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+}
+
+.hiw-headline {
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.3;
+}
+
+.hiw-headline-bar {
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  border-radius: 4px;
+  margin: 0 auto;
+}
+
+/* ── Steps grid ─────────────────────────────────────────────────────────── */
+.hiw-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  align-items: stretch;
+  position: relative;
+}
+
+/* Decorative horizontal connector line between cards */
+.hiw-connector {
+  position: absolute;
+  top: 52px;
+  left: calc(16.67% + 20px);
+  right: calc(16.67% + 20px);
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(15, 52, 96, 0.18) 15%,
+    rgba(15, 52, 96, 0.35) 50%,
+    rgba(15, 52, 96, 0.18) 85%,
+    transparent 100%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Individual step cards ──────────────────────────────────────────────── */
+.hiw-card {
+  position: relative;
+  border-radius: 20px;
+  padding: 2.5rem 2rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1;
+  animation: hiw-card-reveal 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation-delay: calc(var(--idx, 0) * 0.18s);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Card 1 and 3 — light surface */
+.hiw-card--1,
+.hiw-card--3 {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+
+  /* Multi-layered box shadows */
+  box-shadow:
+    0 1px 2px rgba(15, 52, 96, 0.04),
+    0 4px 12px rgba(15, 52, 96, 0.08),
+    0 16px 36px rgba(15, 52, 96, 0.10),
+    0 32px 56px rgba(15, 52, 96, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* Card 2 — dark primary, becomes the centrepiece */
+.hiw-card--2 {
+  background: linear-gradient(145deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  border: none;
+
+  /* Multi-layered box shadows — deeper for the hero card */
+  box-shadow:
+    0 4px 8px rgba(15, 52, 96, 0.20),
+    0 12px 28px rgba(15, 52, 96, 0.30),
+    0 28px 56px rgba(15, 52, 96, 0.22),
+    0 48px 80px rgba(15, 52, 96, 0.14);
+}
+
+/* Blend-mode overlay on dark card */
+.hiw-card--2::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 25% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(11, 122, 75, 0.15) 0%, transparent 50%);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Card top accent bar ────────────────────────────────────────────────── */
+.hiw-card-topbar {
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  border-radius: 0 0 4px 4px;
+}
+
+.hiw-card--1 .hiw-card-topbar,
+.hiw-card--3 .hiw-card-topbar {
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+
+.hiw-card--2 .hiw-card-topbar {
+  background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(11,122,75,0.7));
+}
+
+/* ── Step number badge ──────────────────────────────────────────────────── */
+.hiw-num-wrap {
+  position: relative;
+  z-index: 1;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.hiw-card--1 .hiw-num-wrap,
+.hiw-card--3 .hiw-num-wrap {
+  background: linear-gradient(135deg, rgba(15, 52, 96, 0.08) 0%, rgba(11, 122, 75, 0.07) 100%);
+  border: 1.5px solid rgba(15, 52, 96, 0.12);
+}
+
+.hiw-card--2 .hiw-num-wrap {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+}
+
+.hiw-num {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Gradient text for light cards */
+.hiw-card--1 .hiw-num,
+.hiw-card--3 .hiw-num {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* White text for dark card */
+.hiw-card--2 .hiw-num {
+  color: var(--text-inverse);
+  -webkit-text-fill-color: var(--text-inverse);
+  background: none;
+}
+
+/* ── Card divider ───────────────────────────────────────────────────────── */
+.hiw-card-divider {
+  height: 2px;
+  width: 40px;
+  border-radius: 2px;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hiw-card--1 .hiw-card-divider,
+.hiw-card--3 .hiw-card-divider {
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+
+.hiw-card--2 .hiw-card-divider {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* ── Step title ─────────────────────────────────────────────────────────── */
+.hiw-step-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 0.85rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Dark text on light cards */
+.hiw-card--1 .hiw-step-title,
+.hiw-card--3 .hiw-step-title {
+  color: var(--text-primary);
+}
+
+/* White text on dark card */
+.hiw-card--2 .hiw-step-title {
+  color: var(--text-inverse);
+}
+
+/* ── Step description ──────────────────────────────────────────────────── */
+.hiw-step-desc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+/* Good contrast on light cards: text-secondary (#4A6274) on white */
+.hiw-card--1 .hiw-step-desc,
+.hiw-card--3 .hiw-step-desc {
+  color: var(--text-secondary);
+}
+
+/* Full white on dark card */
+.hiw-card--2 .hiw-step-desc {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* ── Decorative corner accent ────────────────────────────────────────────── */
+.hiw-card-corner {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hiw-card--1 .hiw-card-corner,
+.hiw-card--3 .hiw-card-corner {
+  background: radial-gradient(circle, rgba(15, 52, 96, 0.05) 0%, transparent 70%);
+}
+
+.hiw-card--2 .hiw-card-corner {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+}
+
+/* ── Hover states ───────────────────────────────────────────────────────── */
+.hiw-card--1:hover,
+.hiw-card--3:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 2px 4px rgba(15, 52, 96, 0.05),
+    0 8px 20px rgba(15, 52, 96, 0.13),
+    0 24px 48px rgba(15, 52, 96, 0.15),
+    0 44px 72px rgba(15, 52, 96, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.hiw-card--2:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 6px 12px rgba(15, 52, 96, 0.25),
+    0 18px 40px rgba(15, 52, 96, 0.38),
+    0 40px 72px rgba(15, 52, 96, 0.28),
+    0 64px 100px rgba(15, 52, 96, 0.18);
+}
+
+/* ── Card flip-in entrance animation ────────────────────────────────────── */
+@keyframes hiw-card-reveal {
+  from {
+    opacity: 0;
+    transform: perspective(900px) rotateY(-12deg) translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(900px) rotateY(0deg) translateY(0);
+  }
+}
+
+/* ── Header fade-up entrance ─────────────────────────────────────────────── */
+@keyframes hiw-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hiw-steps {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin: 0 auto;
+    gap: 1.5rem;
+  }
+
+  .hiw-connector {
+    display: none;
+  }
+
+  .hiw-ring--outer,
+  .hiw-ring--inner {
+    display: none;
+  }
+
+  .hiw-card {
+    padding: 2rem 1.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .hiw-section {
+    padding: 4rem 0 5rem;
+  }
+
+  .hiw-header {
+    margin-bottom: 3rem;
+  }
+
+  .hiw-headline {
+    font-size: 1.55rem;
+  }
+
+  .hiw-card {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .hiw-num-wrap {
+    width: 56px;
+    height: 56px;
+  }
+
+  .hiw-num {
+    font-size: 1.3rem;
+  }
+
+  .hiw-step-title {
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,392 @@
+/* ============================================================
+   ContactFaqPreview — Neutral + Pattern | Energetic & Dynamic
+   ============================================================ */
+
+/* ---------- keyframes ---------- */
+
+@keyframes cfqFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cfqBounce {
+  0%, 100% { transform: translateY(0); }
+  40%       { transform: translateY(-6px); }
+  60%       { transform: translateY(-3px); }
+}
+
+@keyframes cfqPulseRing {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes cfqOrbFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-18px) scale(1.04); }
+}
+
+@keyframes cfqHeaderReveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- section shell ---------- */
+
+.cfq-section {
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 0 5rem;
+  background-color: #EEF1F6; /* warm-cool neutral — NOT var(--bg-page) pure white */
+  background-color: color-mix(in srgb, var(--bg-page) 85%, var(--secondary-color) 15%);
+}
+
+/* Dot-grid pattern overlay */
+.cfq-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, var(--primary-color) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.065;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Top accent stripe */
+.cfq-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-color) 0%,
+    var(--primary-color) 50%,
+    var(--secondary-color) 100%
+  );
+  z-index: 2;
+}
+
+/* Decorative orbs */
+.cfq-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  animation: cfqOrbFloat 7s ease-in-out infinite;
+}
+
+.cfq-orb--1 {
+  width: 340px;
+  height: 340px;
+  top: -80px;
+  right: -80px;
+  background: radial-gradient(circle, var(--primary-color), transparent 70%);
+  opacity: 0.07;
+  animation-duration: 8s;
+}
+
+.cfq-orb--2 {
+  width: 240px;
+  height: 240px;
+  bottom: -60px;
+  left: -60px;
+  background: radial-gradient(circle, var(--accent-color), transparent 70%);
+  opacity: 0.1;
+  animation-duration: 11s;
+  animation-delay: -3s;
+}
+
+/* ---------- inner wrapper ---------- */
+
+.cfq-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+}
+
+/* ---------- header ---------- */
+
+.cfq-header {
+  margin-bottom: 3.5rem;
+  animation: cfqHeaderReveal 0.7s ease both;
+  position: relative;
+}
+
+.cfq-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-color) 30%, transparent);
+  padding: 0.3rem 0.9rem;
+  border-radius: 99px;
+  margin-bottom: 1rem;
+}
+
+/* Stroke/outline headline */
+.cfq-title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: clamp(2.6rem, 5.5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 0 0 1rem;
+}
+
+.cfq-title-stroke {
+  /* outlined / stroke text — energetic visual effect */
+  -webkit-text-stroke: 2px var(--primary-color);
+  color: transparent;
+  display: block;
+}
+
+/* Accent underline bar */
+.cfq-title-accent {
+  width: 56px;
+  height: 5px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+  margin-top: 0.75rem;
+}
+
+/* ---------- FAQ list ---------- */
+
+.cfq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* FAQ item card */
+.cfq-item {
+  position: relative;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, var(--border-color) 80%, var(--primary-color) 20%);
+  border-radius: 14px;
+  padding: 0;
+  overflow: hidden;
+  opacity: 0;
+  animation: cfqFadeUp 0.55s ease both;
+  /* Left accent bar via box-shadow */
+  box-shadow:
+    inset 4px 0 0 var(--primary-color),
+    0 4px 20px rgba(15, 52, 96, 0.08);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+/* Offset every other block for vertical rhythm */
+.cfq-item--offset {
+  margin-left: 2.5rem;
+  box-shadow:
+    inset 4px 0 0 var(--accent-color),
+    0 4px 20px rgba(11, 122, 75, 0.09);
+}
+
+.cfq-item--open {
+  box-shadow:
+    inset 4px 0 0 var(--accent-color),
+    0 8px 32px rgba(15, 52, 96, 0.14);
+}
+
+.cfq-item:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 4px 0 0 var(--accent-color),
+    0 10px 36px rgba(15, 52, 96, 0.16);
+}
+
+/* ---------- bouncing attention dot ---------- */
+
+.cfq-bounce-dot {
+  position: absolute;
+  top: 1.25rem;
+  right: 3.5rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  animation: cfqBounce 1.6s ease-in-out infinite;
+  z-index: 2;
+}
+
+/* Pulse ring around the dot */
+.cfq-bounce-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent-color);
+  animation: cfqPulseRing 1.6s ease-out infinite;
+}
+
+/* ---------- question button ---------- */
+
+.cfq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.35rem 1.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.cfq-question-num {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--primary-color);
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.cfq-item--offset .cfq-question-num {
+  color: var(--accent-color);
+}
+
+.cfq-question-text {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  flex: 1;
+  line-height: 1.35;
+}
+
+.cfq-chevron {
+  flex-shrink: 0;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--primary-color) 9%, transparent);
+  transition: transform 0.3s ease, background 0.2s ease;
+}
+
+.cfq-chevron--open {
+  transform: rotate(180deg);
+  background: color-mix(in srgb, var(--accent-color) 14%, transparent);
+  color: var(--accent-color);
+}
+
+/* ---------- answer ---------- */
+
+.cfq-answer-wrap {
+  /* shown/hidden via inline style in JSX */
+}
+
+.cfq-answer-inner {
+  padding: 0 1.4rem 1.35rem 4rem; /* aligns with question text */
+  border-top: 1px solid color-mix(in srgb, var(--border-color) 60%, transparent);
+  padding-top: 1rem;
+}
+
+.cfq-answer-text {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ---------- CTA link ---------- */
+
+.cfq-cta-wrap {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: flex-start;
+  animation: cfqFadeUp 0.6s 0.5s ease both;
+}
+
+.cfq-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-decoration: none;
+  border: 2px solid var(--primary-color);
+  padding: 0.75rem 1.6rem;
+  border-radius: 99px;
+  letter-spacing: 0.02em;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cfq-cta-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--primary-color);
+  transform: translateX(-105%);
+  transition: transform 0.28s ease;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.cfq-cta-link:hover::before {
+  transform: translateX(0);
+}
+
+.cfq-cta-label,
+.cfq-cta-arrow {
+  position: relative;
+  z-index: 1;
+}
+
+.cfq-cta-link:hover .cfq-cta-label,
+.cfq-cta-link:hover .cfq-cta-arrow {
+  color: var(--text-inverse);
+}
+
+.cfq-cta-arrow {
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.cfq-cta-link:hover .cfq-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 640px) {
+  .cfq-section {
+    padding: 4rem 0 3.5rem;
+  }
+
+  .cfq-item--offset {
+    margin-left: 1rem;
+  }
+
+  .cfq-question-text {
+    font-size: 0.97rem;
+  }
+
+  .cfq-answer-inner {
+    padding: 0 1.1rem 1.1rem 1.1rem;
+    padding-top: 0.9rem;
+  }
+
+  .cfq-title {
+    font-size: clamp(2rem, 9vw, 2.8rem);
+  }
+}

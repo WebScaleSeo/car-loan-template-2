@@ -1,0 +1,359 @@
+/* ============================================================
+   ApproachSection — ACCENT Background
+   Bold aurora + diagonal flow + grain texture + rotating gradients
+   ============================================================ */
+
+.approach-section {
+  position: relative;
+  background: var(--primary-color);
+  overflow: hidden;
+  padding: 9rem 0 11rem;
+  isolation: isolate;
+}
+
+/* ---- Aurora rotating gradient background ---- */
+.approach-aurora {
+  position: absolute;
+  inset: -60%;
+  background:
+    radial-gradient(ellipse 90% 55% at 15% 25%, rgba(11, 122, 75, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 65% at 85% 75%, rgba(26, 82, 118, 0.55) 0%, transparent 55%),
+    radial-gradient(ellipse 110% 80% at 50% 50%, rgba(15, 52, 96, 0.8) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 70% 20%, rgba(11, 122, 75, 0.3) 0%, transparent 50%);
+  animation: auroraRotate 14s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes auroraRotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    transform: rotate(3.5deg) scale(1.04);
+    filter: hue-rotate(8deg);
+  }
+  50% {
+    transform: rotate(-2deg) scale(1.07);
+    filter: hue-rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg) scale(1.03);
+    filter: hue-rotate(12deg);
+  }
+  100% {
+    transform: rotate(-1.5deg) scale(1.09);
+    filter: hue-rotate(6deg);
+  }
+}
+
+/* ---- Grain / noise texture ---- */
+.approach-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  pointer-events: none;
+}
+
+/* ---- Floating glow orbs ---- */
+.approach-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 1;
+  pointer-events: none;
+  animation: orbPulse 10s ease-in-out infinite alternate;
+}
+
+.approach-orb--1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(11, 122, 75, 0.28) 0%, transparent 70%);
+  top: -200px;
+  left: -160px;
+  animation-delay: 0s;
+  animation-duration: 11s;
+}
+
+.approach-orb--2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(26, 82, 118, 0.3) 0%, transparent 70%);
+  bottom: -100px;
+  right: -120px;
+  animation-delay: -4s;
+  animation-duration: 9s;
+}
+
+@keyframes orbPulse {
+  0%   { opacity: 0.6; transform: scale(1); }
+  50%  { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 0.7; transform: scale(0.95); }
+}
+
+/* ---- Diagonal edges (page-bg color) ---- */
+.approach-diagonal-top {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: var(--bg-page);
+  clip-path: polygon(0 0, 100% 0, 100% 25%, 0 100%);
+  z-index: 3;
+}
+
+.approach-diagonal-bottom {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: var(--bg-page);
+  clip-path: polygon(0 75%, 100% 0, 100% 100%, 0 100%);
+  z-index: 3;
+}
+
+/* ---- Container ---- */
+.approach-container {
+  position: relative;
+  z-index: 4;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+/* ---- Header ---- */
+.approach-header {
+  margin-bottom: 4.5rem;
+  animation: approachFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.approach-eyebrow {
+  margin-bottom: 1.5rem;
+}
+
+/* FIX: White text on semi-transparent white bg for readable contrast */
+.approach-eyebrow-pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-inverse);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 0.45rem 1.1rem;
+  border-radius: 100px;
+}
+
+/* FIX: Solid white heading — no gradient that fades to dark/transparent */
+.approach-title {
+  font-size: clamp(3rem, 6.5vw, 5.75rem);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.5rem;
+  color: var(--text-inverse);
+}
+
+.approach-title-underline {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.approach-title-underline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+  animation: shimmer 2.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+
+/* ---- Paragraph cards ---- */
+.approach-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.approach-paragraph {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  position: relative;
+  padding: 2.25rem 2.5rem;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  overflow: hidden;
+  opacity: 0;
+  animation: approachFadeUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+}
+
+/* Left accent bar */
+.approach-paragraph::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  border-radius: 0 2px 2px 0;
+}
+
+/* Subtle inner glow on hover */
+.approach-paragraph-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.approach-paragraph:hover .approach-paragraph-glow {
+  opacity: 1;
+}
+
+.approach-paragraph:hover {
+  transform: translateX(8px) translateY(-2px);
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.approach-paragraph--0 { animation-delay: 0.25s; }
+.approach-paragraph--1 { animation-delay: 0.45s; }
+.approach-paragraph--2 { animation-delay: 0.65s; }
+.approach-paragraph--3 { animation-delay: 0.85s; }
+
+/* ---- FIX: Paragraph number — high-contrast, clearly visible ---- */
+.approach-paragraph-num {
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: rgba(255, 255, 255, 0.55);
+  user-select: none;
+  padding-top: 0.15rem;
+  transition: color 0.35s ease;
+}
+
+.approach-paragraph:hover .approach-paragraph-num {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ---- Paragraph text ---- */
+.approach-paragraph-body {
+  padding-top: 0.35rem;
+}
+
+.approach-paragraph-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-inverse);
+  margin: 0 0 0.6rem;
+}
+
+/* FIX: Body text full-opacity white for maximum readability */
+.approach-paragraph-text {
+  color: var(--text-inverse);
+  font-size: 1.08rem;
+  line-height: 1.82;
+  margin: 0;
+  opacity: 0.92;
+}
+
+/* ---- Entrance animation ---- */
+@keyframes approachFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Responsive: tablet ---- */
+@media (max-width: 768px) {
+  .approach-section {
+    padding: 7rem 0 9rem;
+  }
+
+  .approach-paragraph {
+    grid-template-columns: 70px 1fr;
+    gap: 1.5rem;
+    padding: 1.75rem 1.5rem;
+  }
+
+  .approach-paragraph-num {
+    font-size: 2.75rem;
+  }
+
+  .approach-paragraph-text {
+    font-size: 1rem;
+  }
+
+  .approach-title-underline { width: 60px; }
+
+  .approach-diagonal-top,
+  .approach-diagonal-bottom {
+    height: 56px;
+  }
+}
+
+/* ---- Responsive: mobile ---- */
+@media (max-width: 480px) {
+  .approach-section {
+    padding: 6rem 0 7.5rem;
+  }
+
+  .approach-container {
+    padding: 0 1.25rem;
+  }
+
+  .approach-paragraph {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .approach-paragraph-num {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .approach-paragraph:hover {
+    transform: translateY(-2px);
+  }
+
+  .approach-diagonal-top,
+  .approach-diagonal-bottom {
+    height: 40px;
+  }
+}

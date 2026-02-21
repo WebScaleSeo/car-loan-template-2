@@ -1,0 +1,203 @@
+{
+  "name": "generate_faq_page",
+  "description": "Generate complete faq page content",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "seo": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 60
+          },
+          "metaDescription": {
+            "type": "string",
+            "minLength": 50,
+            "maxLength": 160
+          }
+        },
+        "required": [
+          "title",
+          "metaDescription"
+        ]
+      },
+      "componentOrder": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "faqHero",
+            "faqAccordionGeneral",
+            "faqAccordionRates",
+            "faqAccordionProcess",
+            "faqCtaBanner"
+          ]
+        },
+        "minItems": 5,
+        "maxItems": 5
+      },
+      "sections": {
+        "type": "object",
+        "properties": {
+          "faqHero": {
+            "type": "object",
+            "properties": {
+              "headline": {
+                "type": "string",
+                "description": "Page headline, e.g. 'Frequently Asked Questions'"
+              },
+              "subtitle": {
+                "type": "string",
+                "description": "Brief intro, e.g. 'Everything you need to know about auto financing'"
+              }
+            },
+            "required": [
+              "headline",
+              "subtitle"
+            ]
+          },
+          "faqAccordionGeneral": {
+            "type": "object",
+            "properties": {
+              "sectionTitle": {
+                "type": "string",
+                "description": "Category heading, e.g. 'General Questions'"
+              },
+              "questions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "question": {
+                      "type": "string",
+                      "description": "The FAQ question"
+                    },
+                    "answer": {
+                      "type": "string",
+                      "description": "The FAQ answer, 2-4 sentences"
+                    }
+                  },
+                  "required": [
+                    "question",
+                    "answer"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "sectionTitle",
+              "questions"
+            ]
+          },
+          "faqAccordionRates": {
+            "type": "object",
+            "properties": {
+              "sectionTitle": {
+                "type": "string",
+                "description": "Category heading, e.g. 'Rates & Terms'"
+              },
+              "questions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "question": {
+                      "type": "string",
+                      "description": "The FAQ question"
+                    },
+                    "answer": {
+                      "type": "string",
+                      "description": "The FAQ answer, 2-4 sentences"
+                    }
+                  },
+                  "required": [
+                    "question",
+                    "answer"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "sectionTitle",
+              "questions"
+            ]
+          },
+          "faqAccordionProcess": {
+            "type": "object",
+            "properties": {
+              "sectionTitle": {
+                "type": "string",
+                "description": "Category heading, e.g. 'Application & Approval'"
+              },
+              "questions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "question": {
+                      "type": "string",
+                      "description": "The FAQ question"
+                    },
+                    "answer": {
+                      "type": "string",
+                      "description": "The FAQ answer, 2-4 sentences"
+                    }
+                  },
+                  "required": [
+                    "question",
+                    "answer"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "sectionTitle",
+              "questions"
+            ]
+          },
+          "faqCtaBanner": {
+            "type": "object",
+            "properties": {
+              "headline": {
+                "type": "string",
+                "description": "Headline, e.g. 'Still Have Questions?'"
+              },
+              "description": {
+                "type": "string",
+                "description": "Brief supporting text, 10-20 words"
+              },
+              "ctaButtonLabel": {
+                "type": "string",
+                "description": "Button text, e.g. 'Contact Us'"
+              },
+              "ctaButtonUrl": {
+                "type": "string",
+                "description": "URL for the CTA, must be /contact"
+              }
+            },
+            "required": [
+              "headline",
+              "description",
+              "ctaButtonLabel",
+              "ctaButtonUrl"
+            ]
+          }
+        },
+        "required": [
+          "faqHero",
+          "faqAccordionGeneral",
+          "faqAccordionRates",
+          "faqAccordionProcess",
+          "faqCtaBanner"
+        ]
+      }
+    },
+    "required": [
+      "seo",
+      "componentOrder",
+      "sections"
+    ]
+  }
+}

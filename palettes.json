@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Ocean Trust",
+    "colors": {
+      "primary": "#0F3460",
+      "secondary": "#1A5276",
+      "background": {
+        "page": "#F7F9FC",
+        "surface": "#FFFFFF"
+      },
+      "text": {
+        "primary": "#1B2836",
+        "secondary": "#4A6274",
+        "inverse": "#FFFFFF"
+      },
+      "border": "#DFE6ED",
+      "accent": "#0B7A4B"
+    }
+  },
+  {
+    "name": "Midnight Luxe",
+    "colors": {
+      "primary": "#141B2D",
+      "secondary": "#1F2B45",
+      "background": {
+        "page": "#F5F5F8",
+        "surface": "#FFFFFF"
+      },
+      "text": {
+        "primary": "#1A1D2B",
+        "secondary": "#555B6E",
+        "inverse": "#FFFFFF"
+      },
+      "border": "#D8DAE0",
+      "accent": "#8B2FC9"
+    }
+  },
+  {
+    "name": "Slate Precision",
+    "colors": {
+      "primary": "#2C3E50",
+      "secondary": "#34495E",
+      "background": {
+        "page": "#F4F6F7",
+        "surface": "#FFFFFF"
+      },
+      "text": {
+        "primary": "#222D3A",
+        "secondary": "#5D6D7E",
+        "inverse": "#FFFFFF"
+      },
+      "border": "#DCE0E4",
+      "accent": "#C0392B"
+    }
+  },
+  {
+    "name": "Forest Authority",
+    "colors": {
+      "primary": "#1B4332",
+      "secondary": "#245740",
+      "background": {
+        "page": "#F6F9F7",
+        "surface": "#FFFFFF"
+      },
+      "text": {
+        "primary": "#1A2E24",
+        "secondary": "#4E6B5C",
+        "inverse": "#FFFFFF"
+      },
+      "border": "#D5E0DA",
+      "accent": "#B44D12"
+    }
+  },
+  {
+    "name": "Cobalt Drive",
+    "colors": {
+      "primary": "#1A3C8F",
+      "secondary": "#264DA6",
+      "background": {
+        "page": "#F6F8FC",
+        "surface": "#FFFFFF"
+      },
+      "text": {
+        "primary": "#171E33",
+        "secondary": "#4F5D7A",
+        "inverse": "#FFFFFF"
+      },
+      "border": "#D9DEE8",
+      "accent": "#D4380D"
+    }
+  },
+  {
+    "name": "Warm Asphalt",
+    "colors": {
+      "primary": "#3D2C2E",
+      "secondary": "#5A3E40",
+      "background": {
+        "page": "#FAF8F6",
+        "surface": "#FFFFFF"
+      },
+      "text": {
+        "primary": "#2B1F20",
+        "secondary": "#6D5556",
+        "inverse": "#FFFFFF"
+      },
+      "border": "#E4DDDA",
+      "accent": "#A63514"
+    }
+  },
+  {
+    "name": "Steel Velocity",
+    "colors": {
+      "primary": "#263238",
+      "secondary": "#37474F",
+      "background": {
+        "page": "#F5F7F8",
+        "surface": "#FFFFFF"
+      },
+      "text": {
+        "primary": "#1C2529",
+        "secondary": "#546E7A",
+        "inverse": "#FFFFFF"
+      },
+      "border": "#D6DCDF",
+      "accent": "#1565C0"
+    }
+  },
+  {
+    "name": "Burgundy Classic",
+    "colors": {
+      "primary": "#4A1528",
+      "secondary": "#6B1D3A",
+      "background": {
+        "page": "#FBF7F8",
+        "surface": "#FFFFFF"
+      },
+      "text": {
+        "primary": "#2A1118",
+        "secondary": "#6E4A55",
+        "inverse": "#FFFFFF"
+      },
+      "border": "#E6D9DD",
+      "accent": "#1A6B3C"
+    }
+  },
+  {
+    "name": "Titanium Edge",
+    "colors": {
+      "primary": "#2E2E38",
+      "secondary": "#42424E",
+      "background": {
+        "page": "#F6F6F8",
+        "surface": "#FFFFFF"
+      },
+      "text": {
+        "primary": "#212128",
+        "secondary": "#5C5C6B",
+        "inverse": "#FFFFFF"
+      },
+      "border": "#DDDDE2",
+      "accent": "#7B2D8E"
+    }
+  },
+  {
+    "name": "Copper Summit",
+    "colors": {
+      "primary": "#33261E",
+      "secondary": "#4A3728",
+      "background": {
+        "page": "#FAF8F5",
+        "surface": "#FFFFFF"
+      },
+      "text": {
+        "primary": "#261D16",
+        "secondary": "#6B5949",
+        "inverse": "#FFFFFF"
+      },
+      "border": "#E3DDD6",
+      "accent": "#8E3B0E"
+    }
+  }
+]

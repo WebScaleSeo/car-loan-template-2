@@ -1,0 +1,495 @@
+/* ============================================================
+   ContactHero — Full-bleed cinematic, sleek & futuristic
+   Mood: radial/circular • rotating gradients • parallax depth
+   Background: NEUTRAL + PATTERN (deep navy with dot grid)
+   ============================================================ */
+
+/* ── Section shell ── */
+.ch-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* Deep navy base — cinematic dark foundation */
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 40%, rgba(26, 82, 118, 0.55) 0%, transparent 70%),
+    linear-gradient(160deg, #0a1628 0%, var(--primary-color) 40%, #071020 100%);
+}
+
+/* ── CSS Dot-grid pattern layer (NEUTRAL + PATTERN) ── */
+.ch-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 36px 36px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Radial glow core — depth anchor for radial arrangement ── */
+.ch-glow-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 680px;
+  height: 680px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(11, 122, 75, 0.18) 0%,
+    rgba(15, 52, 96, 0.25) 40%,
+    transparent 70%
+  );
+  animation: ch-glow-pulse 6s ease-in-out infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Rotating gradient rings (radial/circular arrangement) ── */
+.ch-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ch-ring-1 {
+  width: 500px;
+  height: 500px;
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(#0a1628, #0a1628) padding-box,
+    conic-gradient(
+      from 0deg,
+      rgba(11, 122, 75, 0.0),
+      rgba(11, 122, 75, 0.7),
+      rgba(15, 52, 96, 0.5),
+      rgba(255,255,255, 0.15),
+      rgba(11, 122, 75, 0.0)
+    ) border-box;
+  animation: ch-spin 12s linear infinite;
+}
+
+.ch-ring-2 {
+  width: 720px;
+  height: 720px;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#0a1628, #0a1628) padding-box,
+    conic-gradient(
+      from 180deg,
+      rgba(255,255,255, 0.0),
+      rgba(255,255,255, 0.1),
+      rgba(11, 122, 75, 0.35),
+      rgba(255,255,255, 0.0)
+    ) border-box;
+  animation: ch-spin 20s linear infinite reverse;
+}
+
+.ch-ring-3 {
+  width: 940px;
+  height: 940px;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#071020, #071020) padding-box,
+    conic-gradient(
+      from 90deg,
+      rgba(255,255,255, 0.0),
+      rgba(26, 82, 118, 0.5),
+      rgba(255,255,255, 0.08),
+      rgba(26, 82, 118, 0.0)
+    ) border-box;
+  animation: ch-spin 30s linear infinite;
+}
+
+/* ── Parallax drift orbs — depth layers ── */
+.ch-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ch-orb-a {
+  width: 380px;
+  height: 380px;
+  top: -80px;
+  right: -60px;
+  background: radial-gradient(circle, rgba(11, 122, 75, 0.22) 0%, transparent 70%);
+  animation: ch-drift-a 14s ease-in-out infinite;
+}
+
+.ch-orb-b {
+  width: 260px;
+  height: 260px;
+  bottom: 0px;
+  left: -40px;
+  background: radial-gradient(circle, rgba(26, 82, 118, 0.35) 0%, transparent 70%);
+  animation: ch-drift-b 18s ease-in-out infinite;
+}
+
+.ch-orb-c {
+  width: 200px;
+  height: 200px;
+  bottom: 120px;
+  right: 15%;
+  background: radial-gradient(circle, rgba(255,255,255, 0.04) 0%, transparent 70%);
+  animation: ch-drift-c 10s ease-in-out infinite;
+}
+
+/* ── Rotating gradient border strip — bottom edge ── */
+.ch-border-strip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: conic-gradient(
+    from var(--ch-angle, 0deg),
+    var(--accent-color),
+    var(--secondary-color),
+    transparent,
+    var(--accent-color)
+  );
+  animation: ch-border-rotate 4s linear infinite;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ── Content wrapper ── */
+.ch-content-wrap {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 900px;
+  padding: 7rem 2.5rem 6rem;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.ch-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* ── Eyebrow ── */
+.ch-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  margin-bottom: 1.25rem;
+  opacity: 0;
+  animation: ch-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+.ch-eyebrow-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  box-shadow: 0 0 6px var(--accent-color);
+}
+
+/* ── Headline ── */
+.ch-headline {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.5rem;
+  /* Gradient text — futuristic shimmer */
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    rgba(255,255,255,0.85) 30%,
+    rgba(11, 122, 75, 0.9) 60%,
+    #ffffff 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation:
+    ch-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both,
+    ch-gradient-shift 8s ease infinite 1s;
+}
+
+/* ── Subtitle ── */
+.ch-subtitle {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-weight: 400;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+  opacity: 0;
+  animation: ch-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+}
+
+/* ── CTA row ── */
+.ch-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 3.5rem;
+  opacity: 0;
+  animation: ch-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.55s forwards;
+}
+
+/* Primary CTA */
+.ch-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.9rem 2.2rem;
+  border-radius: 60px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--text-inverse);
+  text-decoration: none;
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--secondary-color) 100%);
+  background-size: 200% 200%;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-position 0.5s ease;
+  box-shadow: 0 4px 24px rgba(11, 122, 75, 0.35), 0 0 0 0 rgba(11, 122, 75, 0);
+}
+
+.ch-cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 62px;
+  background: conic-gradient(
+    from 0deg,
+    var(--accent-color),
+    var(--secondary-color),
+    var(--accent-color)
+  );
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: ch-spin 3s linear infinite;
+}
+
+.ch-cta-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  background-position: 100% 0%;
+  box-shadow: 0 8px 40px rgba(11, 122, 75, 0.55), 0 0 0 4px rgba(11, 122, 75, 0.2);
+}
+
+.ch-cta-btn:hover::before {
+  opacity: 1;
+}
+
+.ch-cta-arrow {
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.ch-cta-btn:hover .ch-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Secondary CTA */
+.ch-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.9rem 1.8rem;
+  border-radius: 60px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.ch-secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ── Trust / stat badges — glassmorphism ── */
+.ch-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.ch-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  min-width: 110px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+  opacity: 0;
+  animation: ch-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor: default;
+}
+
+.ch-badge:hover {
+  transform: translateY(-4px);
+  border-color: rgba(11, 122, 75, 0.4);
+  box-shadow: 0 8px 32px rgba(11, 122, 75, 0.18), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.ch-badge-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  line-height: 1.1;
+  /* Gradient accent on values */
+  background: linear-gradient(135deg, #ffffff 0%, rgba(11, 122, 75, 0.9) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ch-badge-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 0.25rem;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+
+/* Entrance fade-up */
+@keyframes ch-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Rotating rings */
+@keyframes ch-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Radial glow pulse */
+@keyframes ch-glow-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1);   opacity: 0.8; }
+  50%       { transform: translate(-50%, -50%) scale(1.15); opacity: 1;   }
+}
+
+/* Gradient shift on headline */
+@keyframes ch-gradient-shift {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+/* Orb drift animations (parallax-style) */
+@keyframes ch-drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-30px, 25px) scale(1.08); }
+  66%       { transform: translate(20px, -15px) scale(0.94); }
+}
+
+@keyframes ch-drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(25px, -30px) scale(1.1); }
+  75%       { transform: translate(-15px, 20px) scale(0.92); }
+}
+
+@keyframes ch-drift-c {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(-20px, -20px); }
+}
+
+/* Animated border strip */
+@keyframes ch-border-rotate {
+  from { background-position: 0% 50%; filter: hue-rotate(0deg); }
+  to   { background-position: 100% 50%; filter: hue-rotate(30deg); }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .ch-content-wrap {
+    padding: 5rem 1.5rem 4rem;
+  }
+
+  .ch-ring-1 { width: 320px; height: 320px; }
+  .ch-ring-2 { width: 460px; height: 460px; }
+  .ch-ring-3 { width: 600px; height: 600px; }
+
+  .ch-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ch-cta-btn,
+  .ch-secondary-btn {
+    justify-content: center;
+  }
+
+  .ch-badge {
+    min-width: 90px;
+    padding: 0.75rem 1rem;
+  }
+
+  .ch-badge-value {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .ch-badges-row {
+    gap: 0.6rem;
+  }
+
+  .ch-badge {
+    flex: 1 1 calc(50% - 0.3rem);
+    min-width: 0;
+  }
+}

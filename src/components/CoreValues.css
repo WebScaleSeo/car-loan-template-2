@@ -1,0 +1,543 @@
+/* ============================================================
+   CoreValues — Retro-Modern Fusion | Split-Screen with Bleed
+   Card Stack Visual + Stroke Typography + Morphing Shapes
+   ============================================================ */
+
+/* ── SECTION BASE ── */
+.cv-section {
+  position: relative;
+  background-color: color-mix(in srgb, var(--bg-page) 85%, var(--secondary-color) 6%); /* warm neutral — slightly warmer than bg-page */
+  overflow: hidden;
+  padding: 6rem 0;
+  isolation: isolate;
+}
+
+/* ── DOT GRID PATTERN OVERLAY ── */
+.cv-dot-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, color-mix(in srgb, var(--primary-color) 12%, transparent) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── MORPHING BLOBS (decorative only — safe animation) ── */
+.cv-blob {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.07;
+  animation: morphBlob 12s ease-in-out infinite alternate;
+}
+
+.cv-blob-1 {
+  width: 480px;
+  height: 480px;
+  background: var(--primary-color);
+  top: -120px;
+  right: -80px;
+  animation-delay: 0s;
+  animation-duration: 14s;
+}
+
+.cv-blob-2 {
+  width: 320px;
+  height: 320px;
+  background: var(--accent-color);
+  bottom: -80px;
+  left: 15%;
+  animation-delay: -5s;
+  animation-duration: 10s;
+}
+
+@keyframes morphBlob {
+  0%   { border-radius: 60% 40% 70% 30% / 50% 65% 35% 70%; }
+  25%  { border-radius: 45% 55% 40% 60% / 60% 40% 65% 35%; }
+  50%  { border-radius: 30% 70% 55% 45% / 70% 30% 50% 60%; }
+  75%  { border-radius: 55% 45% 35% 65% / 40% 60% 45% 55%; }
+  100% { border-radius: 65% 35% 50% 50% / 55% 45% 60% 40%; }
+}
+
+/* ── SPLIT-SCREEN LAYOUT ── */
+.cv-layout {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: stretch;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  gap: 0;
+}
+
+/* ── LEFT PANEL ── */
+.cv-left-panel {
+  position: relative;
+  flex: 0 0 38%;
+  max-width: 38%;
+  display: flex;
+  flex-direction: column;
+  padding-right: 4rem;
+}
+
+/* Bleed strip that extends to left edge of viewport */
+.cv-bleed-strip {
+  position: absolute;
+  top: -6rem;
+  bottom: -6rem;
+  left: calc(-50vw + 50%);
+  width: calc(50vw - 50% + 100%);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--primary-color) 10%, var(--bg-page)) 0%,
+    color-mix(in srgb, var(--primary-color) 5%, var(--bg-page)) 100%
+  );
+  border-right: 2px solid var(--border-color);
+  z-index: -1;
+}
+
+.cv-left-inner {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 0;
+}
+
+/* ── EYEBROW LABEL ── */
+.cv-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  animation: fadeSlideUp 0.6s ease both;
+  animation-delay: 0.1s;
+}
+
+.cv-eyebrow-line {
+  display: block;
+  width: 36px;
+  height: 2px;
+  background: var(--accent-color);
+  flex-shrink: 0;
+}
+
+.cv-eyebrow-text {
+  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+}
+
+/* ── STROKE / OUTLINED TITLE (retro-modern fusion) ── */
+.cv-stroke-title {
+  font-family: var(--font-heading, 'Poppins', sans-serif);
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+
+  /* Stroke / outline typography effect */
+  -webkit-text-stroke: 2.5px var(--primary-color);
+  color: transparent;
+
+  /* Partial fill via gradient for retro-modern feel */
+  background: linear-gradient(
+    160deg,
+    var(--primary-color) 0%,
+    var(--primary-color) 45%,
+    transparent 45%,
+    transparent 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  animation: fadeSlideUp 0.7s ease both;
+  animation-delay: 0.2s;
+}
+
+.cv-left-copy {
+  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  animation: fadeSlideUp 0.7s ease both;
+  animation-delay: 0.35s;
+}
+
+/* ── RETRO DECORATIVE ELEMENTS ── */
+.cv-retro-deco {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  margin-bottom: 2rem;
+  animation: fadeSlideUp 0.7s ease both;
+  animation-delay: 0.4s;
+}
+
+.cv-deco-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  background-image:
+    linear-gradient(var(--border-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+  background-size: 12px 12px;
+  opacity: 0.6;
+}
+
+.cv-deco-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2.5px solid var(--primary-color);
+  opacity: 0.4;
+}
+
+.cv-deco-ring-1 {
+  width: 70px;
+  height: 70px;
+  top: 10px;
+  left: 20px;
+}
+
+.cv-deco-ring-2 {
+  width: 40px;
+  height: 40px;
+  top: 30px;
+  left: 50px;
+  border-color: var(--accent-color);
+  opacity: 0.5;
+}
+
+.cv-deco-square {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid var(--secondary-color);
+  top: 55px;
+  left: 5px;
+  transform: rotate(20deg);
+  opacity: 0.35;
+}
+
+/* ── COUNT BADGE ── */
+.cv-count-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--primary-color);
+  color: var(--text-inverse);
+  border-radius: 4px 16px 16px 4px;
+  padding: 0.75rem 1.25rem 0.75rem 1rem;
+  width: fit-content;
+  animation: fadeSlideUp 0.7s ease both;
+  animation-delay: 0.5s;
+}
+
+.cv-count-num {
+  font-family: var(--font-heading, 'Poppins', sans-serif);
+  font-size: 2.4rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--text-inverse);
+}
+
+.cv-count-label {
+  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text-inverse) 80%, transparent);
+  line-height: 1.4;
+}
+
+/* ── RIGHT PANEL ── */
+.cv-right-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-left: 3rem;
+}
+
+/* ── CARDS GRID ── */
+.cv-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  align-items: stretch;
+}
+
+/* ── INDIVIDUAL CARD (fanned/stacked depth effect) ── */
+.cv-card {
+  position: relative;
+  animation: fadeSlideUp 0.65s ease both;
+  animation-delay: calc(0.1s + var(--i, 0) * 0.12s);
+}
+
+/* Card stack layers — creates depth without dangerous animations */
+.cv-card-stack-1,
+.cv-card-stack-2 {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.cv-card-stack-2 {
+  background: color-mix(in srgb, var(--primary-color) 15%, var(--bg-surface));
+  transform: translate(6px, 6px);
+  z-index: -2;
+  border: 1px solid var(--border-color);
+}
+
+.cv-card-stack-1 {
+  background: color-mix(in srgb, var(--primary-color) 8%, var(--bg-surface));
+  transform: translate(3px, 3px);
+  z-index: -1;
+  border: 1px solid var(--border-color);
+}
+
+/* ── CARD INNER FACE ── */
+.cv-card-inner {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.75rem 1.5rem 1.25rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
+  cursor: default;
+}
+
+.cv-card:hover .cv-card-inner {
+  transform: translate(-4px, -6px);
+  box-shadow:
+    0 16px 40px color-mix(in srgb, var(--primary-color) 18%, transparent),
+    0 4px 12px color-mix(in srgb, var(--primary-color) 10%, transparent);
+  border-color: color-mix(in srgb, var(--primary-color) 40%, var(--border-color));
+}
+
+/* Top color strip reveal on hover */
+.cv-card-inner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+
+.cv-card:hover .cv-card-inner::before {
+  transform: scaleX(1);
+}
+
+/* ── CARD INDEX NUMBER (oversized retro) ── */
+.cv-card-index {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  font-family: var(--font-heading, 'Poppins', sans-serif);
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--primary-color);
+  opacity: 0.06;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.3s ease;
+}
+
+.cv-card:hover .cv-card-index {
+  opacity: 0.12;
+}
+
+/* ── ICON ── */
+.cv-card-icon-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  width: 52px;
+  height: 52px;
+}
+
+.cv-card-icon {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--primary-color) 12%, transparent),
+    color-mix(in srgb, var(--secondary-color) 8%, transparent)
+  );
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  padding: 12px;
+  transition: background 0.3s ease, transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.cv-card-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cv-card:hover .cv-card-icon {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--text-inverse);
+  transform: rotate(-5deg) scale(1.05);
+}
+
+/* Decorative ring around icon */
+.cv-card-icon-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 16px;
+  border: 1.5px dashed color-mix(in srgb, var(--primary-color) 25%, transparent);
+  pointer-events: none;
+  transition: border-color 0.3s ease, transform 0.4s ease;
+}
+
+.cv-card:hover .cv-card-icon-ring {
+  border-color: color-mix(in srgb, var(--accent-color) 50%, transparent);
+  transform: rotate(10deg) scale(1.05);
+}
+
+/* ── CARD TEXT ── */
+.cv-card-title {
+  font-family: var(--font-heading, 'Poppins', sans-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.65rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.cv-card-desc {
+  font-family: var(--font-body, 'Poppins', sans-serif);
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0;
+  flex: 1;
+}
+
+/* ── CARD FOOTER ACCENT ── */
+.cv-card-footer {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.cv-card-accent-bar {
+  width: 32px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  transition: width 0.3s ease;
+}
+
+.cv-card:hover .cv-card-accent-bar {
+  width: 56px;
+}
+
+/* ── ENTRANCE ANIMATION ── */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── RESPONSIVE: TABLET ── */
+@media (max-width: 1024px) {
+  .cv-layout {
+    flex-direction: column;
+    padding: 0 1.5rem;
+  }
+
+  .cv-left-panel {
+    flex: none;
+    max-width: 100%;
+    padding-right: 0;
+    padding-bottom: 3rem;
+  }
+
+  .cv-bleed-strip {
+    left: -1.5rem;
+    right: -1.5rem;
+    width: auto;
+    top: -6rem;
+    bottom: 0;
+    border-right: none;
+    border-bottom: 2px solid var(--border-color);
+  }
+
+  .cv-right-panel {
+    padding-left: 0;
+  }
+
+  .cv-stroke-title {
+    font-size: 2.8rem;
+  }
+}
+
+/* ── RESPONSIVE: MOBILE ── */
+@media (max-width: 640px) {
+  .cv-section {
+    padding: 4rem 0;
+  }
+
+  .cv-layout {
+    padding: 0 1.25rem;
+  }
+
+  .cv-stroke-title {
+    font-size: 2rem;
+    -webkit-text-stroke: 2px var(--primary-color);
+  }
+
+  .cv-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .cv-left-panel {
+    padding-bottom: 2.5rem;
+  }
+
+  .cv-right-panel {
+    padding-left: 0;
+  }
+
+  .cv-count-badge {
+    margin-bottom: 1rem;
+  }
+}

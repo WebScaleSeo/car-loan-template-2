@@ -1,0 +1,389 @@
+/* ═══════════════════════════════════════════════════════════
+   ContactCtaBanner — ACCENT treatment, L-shaped layout
+   Scale-up on scroll · clip-path shapes · paint-worklet textures
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Root section ── */
+.cta-banner {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 55%,
+    var(--secondary-color) 100%
+  );
+  padding: 0;
+  isolation: isolate;
+}
+
+/* ── Simulated paint-worklet texture
+   Two layered repeating patterns create a woven, tactile feel ── */
+.cta-texture {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,255,255,0.04) 1.5px, transparent 1.5px);
+  background-size: 28px 28px, 14px 14px;
+  background-position: 0 0, 7px 7px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Clip-path decorative shapes ── */
+.cta-shape {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hexagonal slab — top-right corner */
+.cta-shape--hex {
+  top: -60px;
+  right: -80px;
+  width: 340px;
+  height: 340px;
+  background: rgba(255,255,255,0.06);
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+/* Bold slab — upper-right */
+.cta-shape--slab {
+  top: -20px;
+  right: 60px;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 60% 100%, 0 100%);
+}
+
+/* Glowing orb — bottom-left */
+.cta-shape--orb {
+  bottom: -80px;
+  left: -60px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(11,122,75,0.35) 0%, transparent 70%);
+  filter: blur(32px);
+}
+
+/* Diagonal slash — mid-right */
+.cta-shape--slash {
+  top: 50%;
+  right: 18%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 140px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4), transparent);
+  clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 90%);
+}
+
+/* ══════════════════
+   L-SHAPED LAYOUT
+   Top arm: full-width band (horizontal L)
+   Bottom row: left col (vertical L arm) + right deco col
+   ══════════════════ */
+
+/* ── Top arm (full-width headline strip) ── */
+.cta-top-arm {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 5% 2.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  animation: cta-scale-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cta-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+}
+
+.cta-eyebrow-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(11,122,75,0.3);
+  animation: cta-pulse 2.4s ease-in-out infinite;
+}
+
+.cta-eyebrow-text {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-inverse);
+  opacity: 0.75;
+}
+
+.cta-headline {
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-inverse);
+  margin: 0;
+  max-width: 820px;
+  /* Gradient shimmer on text */
+  background: linear-gradient(
+    105deg,
+    var(--text-inverse) 0%,
+    rgba(255,255,255,0.85) 40%,
+    rgba(255,255,255,0.6) 70%,
+    var(--text-inverse) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Bottom row ── */
+.cta-bottom-row {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+/* ── Content column (vertical arm of the L) ── */
+.cta-content-col {
+  flex: 0 0 60%;
+  padding: 2.8rem 5% 3.5rem;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  animation: cta-scale-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+}
+
+.cta-description {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-inverse);
+  opacity: 0.88;
+  margin: 0 0 2.2rem;
+  max-width: 520px;
+}
+
+.cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* CTA Button */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2rem;
+  background: var(--text-inverse);
+  color: var(--primary-color);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.cta-btn:hover::before {
+  opacity: 1;
+}
+
+.cta-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+
+.cta-btn:hover .cta-btn-label,
+.cta-btn:hover .cta-btn-arrow {
+  color: var(--text-inverse);
+}
+
+.cta-btn-label {
+  position: relative;
+  z-index: 1;
+  transition: color 0.25s ease;
+}
+
+.cta-btn-arrow {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  transition: color 0.25s ease, transform 0.22s ease;
+}
+
+.cta-btn:hover .cta-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Decorative column (right side — completes the L shape) ── */
+.cta-deco-col {
+  flex: 0 0 40%;
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: cta-scale-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.34s both;
+}
+
+/* Concentric rings — static, no spin to avoid screenshot artifacts */
+.cta-ring {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.cta-ring--outer {
+  width: 200px;
+  height: 200px;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.05), inset 0 0 40px rgba(255,255,255,0.04);
+}
+
+.cta-ring--inner {
+  width: 130px;
+  height: 130px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, transparent 70%);
+}
+
+/* Monogram badge */
+.cta-monogram {
+  position: relative;
+  z-index: 2;
+  width: 72px;
+  height: 72px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+  width: 80px;
+  height: 80px;
+}
+
+.cta-monogram span {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-inverse);
+  letter-spacing: 0.06em;
+}
+
+/* ── Bottom clip-path divider ── */
+.cta-bottom-clip {
+  position: relative;
+  z-index: 2;
+  height: 56px;
+  background: var(--bg-page);
+  clip-path: polygon(0 40%, 100% 0%, 100% 100%, 0% 100%);
+  margin-top: -1px;
+}
+
+/* ══════════════════
+   KEYFRAMES
+   ══════════════════ */
+@keyframes cta-scale-up {
+  from {
+    opacity: 0;
+    transform: scale(0.93) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes cta-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(11,122,75,0.3); }
+  50%       { box-shadow: 0 0 0 7px rgba(11,122,75,0.1); }
+}
+
+
+/* ══════════════════
+   RESPONSIVE — Mobile (375px)
+   ══════════════════ */
+@media (max-width: 640px) {
+  .cta-top-arm {
+    padding: 2.8rem 6% 1.8rem;
+  }
+
+  .cta-headline {
+    font-size: 2rem;
+  }
+
+  .cta-bottom-row {
+    flex-direction: column;
+  }
+
+  .cta-content-col {
+    flex: 1;
+    padding: 2rem 6% 2rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .cta-deco-col {
+    flex: 0 0 auto;
+    min-height: 130px;
+  }
+
+  .cta-ring--outer {
+    width: 130px;
+    height: 130px;
+  }
+
+  .cta-ring--inner {
+    width: 85px;
+    height: 85px;
+  }
+
+  .cta-btn {
+    padding: 0.8rem 1.6rem;
+    font-size: 0.9rem;
+  }
+
+  .cta-shape--hex {
+    width: 220px;
+    height: 220px;
+    right: -60px;
+    top: -40px;
+  }
+
+  .cta-shape--slash {
+    display: none;
+  }
+}
+
+/* ── Mid breakpoint (768px) ── */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .cta-content-col {
+    flex: 0 0 65%;
+  }
+  .cta-deco-col {
+    flex: 0 0 35%;
+  }
+  .cta-headline {
+    font-size: 2.8rem;
+  }
+}

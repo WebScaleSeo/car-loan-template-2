@@ -1,0 +1,473 @@
+/* ============================================================
+   CtaBanner — Dark & Moody | Asymmetric Split | Animated Borders
+   IMAGE + GRADIENT background | Parallax drift layers
+   ============================================================ */
+
+/* ---------- Keyframes ---------- */
+
+@keyframes ctaDriftA {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(30px, -20px) scale(1.05); }
+  66%  { transform: translate(-20px, 15px) scale(0.97); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes ctaDriftB {
+  0%   { transform: translate(0, 0) scale(1); }
+  40%  { transform: translate(-35px, 25px) scale(1.08); }
+  80%  { transform: translate(20px, -10px) scale(0.95); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes ctaDriftC {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(25px, 30px) scale(1.03); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes ctaBorderSpin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes ctaBorderSlide {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes ctaFadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ctaTagPop {
+  from { opacity: 0; transform: translateY(12px) scale(0.92); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes ctaPulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(11, 122, 75, 0.4), 0 0 40px rgba(11, 122, 75, 0.15); }
+  50%       { box-shadow: 0 0 35px rgba(11, 122, 75, 0.7), 0 0 70px rgba(11, 122, 75, 0.3); }
+}
+
+@keyframes ctaBorderGlow {
+  0%, 100% { opacity: 0.6; background-position: 0% 50%; }
+  50%       { opacity: 1;   background-position: 100% 50%; }
+}
+
+@keyframes ctaDividerExpand {
+  from { width: 0; opacity: 0; }
+  to   { width: 80px; opacity: 1; }
+}
+
+
+/* ---------- Section Shell ---------- */
+
+.cta-banner-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  isolation: isolate;
+}
+
+/* ---------- Background Layers ---------- */
+
+.cta-bg-image {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/image4.webp');
+  background-size: cover;
+  background-position: center 30%;
+  z-index: 0;
+  /* subtle parallax feel via scale */
+  transform: scale(1.06);
+  animation: ctaDriftA 28s ease-in-out infinite;
+}
+
+.cta-bg-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    rgba(5, 15, 35, 0.92) 0%,
+    rgba(15, 52, 96, 0.80) 50%,
+    rgba(5, 15, 35, 0.70) 100%
+  );
+  z-index: 1;
+}
+
+.cta-bg-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(11, 122, 75, 0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 85% 20%, rgba(26, 82, 118, 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 55% 50%, rgba(15, 52, 96, 0.4) 0%, transparent 70%);
+  z-index: 2;
+  mix-blend-mode: screen;
+}
+
+/* ---------- Parallax Orbs ---------- */
+
+.cta-orb {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 3;
+  pointer-events: none;
+  filter: blur(48px);
+}
+
+.cta-orb-1 {
+  width: 420px;
+  height: 420px;
+  top: -120px;
+  right: -60px;
+  background: radial-gradient(circle, rgba(26, 82, 118, 0.45) 0%, transparent 70%);
+  animation: ctaDriftB 20s ease-in-out infinite;
+}
+
+.cta-orb-2 {
+  width: 300px;
+  height: 300px;
+  bottom: -80px;
+  left: 5%;
+  background: radial-gradient(circle, rgba(11, 122, 75, 0.35) 0%, transparent 70%);
+  animation: ctaDriftC 25s ease-in-out infinite;
+}
+
+.cta-orb-3 {
+  width: 200px;
+  height: 200px;
+  top: 40%;
+  left: 38%;
+  background: radial-gradient(circle, rgba(15, 52, 96, 0.5) 0%, transparent 70%);
+  filter: blur(36px);
+  animation: ctaDriftA 18s ease-in-out infinite reverse;
+}
+
+/* ---------- Animated Border Lines ---------- */
+
+.cta-animated-border-top,
+.cta-animated-border-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 10;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--accent-color) 20%,
+    var(--primary-color) 50%,
+    var(--accent-color) 80%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: ctaBorderGlow 4s ease-in-out infinite;
+}
+
+.cta-animated-border-top    { top: 0; }
+.cta-animated-border-bottom { bottom: 0; }
+
+/* ---------- Layout ---------- */
+
+.cta-inner {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 5rem 3rem 5rem 4rem;
+  display: grid;
+  /* Asymmetric split: 58% / 42% */
+  grid-template-columns: 1fr 0.72fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* ---------- Left Column ---------- */
+
+.cta-left {
+  animation: ctaFadeUp 0.9s ease both;
+  animation-delay: 0.1s;
+}
+
+.cta-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(11, 122, 75, 0.18);
+  border: 1px solid rgba(11, 122, 75, 0.45);
+  color: #5DF0A8; /* bright mint — high contrast on dark bg */
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 1.4rem;
+  animation: ctaTagPop 0.7s ease both;
+  animation-delay: 0.15s;
+}
+
+.cta-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #5DF0A8;
+  display: inline-block;
+  animation: ctaPulseGlow 2s ease-in-out infinite;
+}
+
+.cta-headline {
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-inverse);
+  margin: 0 0 1.4rem;
+  letter-spacing: -0.02em;
+  /* subtle left-edge gradient accent */
+  background: linear-gradient(135deg, #FFFFFF 60%, rgba(93, 240, 168, 0.85) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: ctaFadeUp 0.9s ease both;
+  animation-delay: 0.25s;
+}
+
+.cta-description {
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 480px;
+  animation: ctaFadeUp 0.9s ease both;
+  animation-delay: 0.4s;
+}
+
+.cta-divider {
+  margin-top: 2.5rem;
+  height: 3px;
+  width: 80px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent-color), transparent);
+  animation: ctaDividerExpand 1s ease both;
+  animation-delay: 0.6s;
+}
+
+/* ---------- Right Column (CTA Card) ---------- */
+
+.cta-right {
+  display: flex;
+  justify-content: flex-end;
+  animation: ctaFadeUp 0.9s ease both;
+  animation-delay: 0.5s;
+}
+
+.cta-card {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+}
+
+/* Glassmorphism card surface */
+.cta-card-inner {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.2rem;
+}
+
+/* Rotating animated border ring */
+.cta-card-border-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 23px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(11, 122, 75, 0.8) 60deg,
+    rgba(15, 52, 96, 0.5) 120deg,
+    transparent 180deg,
+    rgba(26, 82, 118, 0.6) 240deg,
+    rgba(11, 122, 75, 0.4) 300deg,
+    transparent 360deg
+  );
+  animation: ctaBorderSpin 5s linear infinite;
+  z-index: 1;
+  /* mask outer visible ring */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 3px;
+}
+
+.cta-card-badge {
+  background: rgba(11, 122, 75, 0.22);
+  border: 1px solid rgba(11, 122, 75, 0.5);
+  color: #5DF0A8;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 100px;
+}
+
+.cta-card-subtext {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ---------- CTA Button ---------- */
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  color: var(--text-inverse);
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--secondary-color) 100%);
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: ctaPulseGlow 3s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(11, 122, 75, 0.55);
+}
+
+.cta-button-text {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-button-arrow {
+  position: relative;
+  z-index: 1;
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.cta-button:hover .cta-button-arrow {
+  transform: translateX(4px);
+}
+
+/* shimmer sweep on hover */
+.cta-button-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.2) 50%, transparent 60%);
+  background-size: 200% 100%;
+  background-position: -100% 0;
+  transition: background-position 0.5s ease;
+}
+
+.cta-button:hover .cta-button-glow {
+  background-position: 200% 0;
+}
+
+.cta-fine-print {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* ---------- Responsive: tablet ---------- */
+
+@media (max-width: 1024px) {
+  .cta-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 4rem 2.5rem;
+  }
+
+  .cta-right {
+    justify-content: flex-start;
+  }
+
+  .cta-card {
+    max-width: 100%;
+  }
+
+  .cta-card-inner {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    gap: 1.5rem;
+  }
+
+  .cta-card-badge,
+  .cta-fine-print {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* ---------- Responsive: mobile ---------- */
+
+@media (max-width: 640px) {
+  .cta-inner {
+    padding: 3.5rem 1.5rem;
+    gap: 2.5rem;
+  }
+
+  .cta-headline {
+    font-size: 2rem;
+  }
+
+  .cta-card-inner {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .cta-card-badge,
+  .cta-fine-print {
+    text-align: center;
+  }
+
+  .cta-orb-1 {
+    width: 250px;
+    height: 250px;
+    right: -80px;
+    top: -60px;
+  }
+
+  .cta-orb-3 {
+    display: none;
+  }
+}

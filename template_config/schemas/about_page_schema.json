@@ -1,0 +1,187 @@
+{
+  "name": "generate_about_page",
+  "description": "Generate complete about page content",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "seo": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 60
+          },
+          "metaDescription": {
+            "type": "string",
+            "minLength": 50,
+            "maxLength": 160
+          }
+        },
+        "required": [
+          "title",
+          "metaDescription"
+        ]
+      },
+      "componentOrder": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "aboutHero",
+            "missionStatement",
+            "coreValues",
+            "approachSection",
+            "aboutCtaBanner"
+          ]
+        },
+        "minItems": 5,
+        "maxItems": 5
+      },
+      "sections": {
+        "type": "object",
+        "properties": {
+          "aboutHero": {
+            "type": "object",
+            "properties": {
+              "headline": {
+                "type": "string",
+                "description": "Page headline, e.g. 'About DriveRate'"
+              },
+              "introText": {
+                "type": "string",
+                "description": "Brief company introduction, 2-3 sentences about who DriveRate is"
+              }
+            },
+            "required": [
+              "headline",
+              "introText"
+            ]
+          },
+          "missionStatement": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string",
+                "description": "Small label above the statement, e.g. 'Our Mission'"
+              },
+              "statement": {
+                "type": "string",
+                "description": "A clear, compelling mission statement, 1-2 sentences"
+              }
+            },
+            "required": [
+              "label",
+              "statement"
+            ]
+          },
+          "coreValues": {
+            "type": "object",
+            "properties": {
+              "sectionTitle": {
+                "type": "string",
+                "description": "Heading, e.g. 'What We Stand For'"
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "iconName": {
+                      "type": "string",
+                      "description": "Icon identifier, e.g. 'transparency', 'handshake', 'target'"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Value title, 1-3 words"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Value explanation, 1-2 sentences"
+                    }
+                  },
+                  "required": [
+                    "iconName",
+                    "title",
+                    "description"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "sectionTitle",
+              "values"
+            ]
+          },
+          "approachSection": {
+            "type": "object",
+            "properties": {
+              "sectionTitle": {
+                "type": "string",
+                "description": "Heading, e.g. 'Our Approach'"
+              },
+              "paragraphs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "description": "A paragraph of body text, 2-3 sentences"
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "sectionTitle",
+              "paragraphs"
+            ]
+          },
+          "aboutCtaBanner": {
+            "type": "object",
+            "properties": {
+              "headline": {
+                "type": "string",
+                "description": "Motivating headline, e.g. 'Let's Find Your Rate'"
+              },
+              "description": {
+                "type": "string",
+                "description": "Brief supporting text, 10-20 words"
+              },
+              "ctaButtonLabel": {
+                "type": "string",
+                "description": "Button text, e.g. 'Get in Touch'"
+              },
+              "ctaButtonUrl": {
+                "type": "string",
+                "description": "URL for the CTA, must be /contact"
+              }
+            },
+            "required": [
+              "headline",
+              "description",
+              "ctaButtonLabel",
+              "ctaButtonUrl"
+            ]
+          }
+        },
+        "required": [
+          "aboutHero",
+          "missionStatement",
+          "coreValues",
+          "approachSection",
+          "aboutCtaBanner"
+        ]
+      }
+    },
+    "required": [
+      "seo",
+      "componentOrder",
+      "sections"
+    ]
+  }
+}

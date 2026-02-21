@@ -1,0 +1,348 @@
+/* ============================================================
+   LoanTypesPreview — ACCENT background, editorial column,
+   card-stack / fanned cards, typewriter reveal
+   ============================================================ */
+
+/* ---------- Section base ---------- */
+.ltp-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      140deg,
+      var(--primary-color) 0%,
+      var(--secondary-color) 55%,
+      #091f3e 100%
+    );
+  padding: 6rem 0 7rem;
+}
+
+/* ---------- Dot-grid texture ---------- */
+.ltp-dot-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---------- Ambient orbs ---------- */
+.ltp-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(80px);
+}
+.ltp-orb--a {
+  width: 520px;
+  height: 520px;
+  top: -180px;
+  right: -120px;
+  background: radial-gradient(circle, rgba(11,122,75,0.28) 0%, transparent 70%);
+  animation: ltp-orb-pulse 8s ease-in-out infinite alternate;
+}
+.ltp-orb--b {
+  width: 380px;
+  height: 380px;
+  bottom: -100px;
+  left: -80px;
+  background: radial-gradient(circle, rgba(26,82,118,0.45) 0%, transparent 70%);
+  animation: ltp-orb-pulse 11s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes ltp-orb-pulse {
+  from { opacity: 0.7; transform: scale(1); }
+  to   { opacity: 1;   transform: scale(1.12); }
+}
+
+/* ---------- Inner layout grid ---------- */
+.ltp-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+/* ---------- Header column ---------- */
+.ltp-header-col {
+  animation: ltp-slide-left 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ltp-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  margin-bottom: 1.25rem;
+}
+.ltp-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background: var(--accent-color);
+  border-radius: 2px;
+}
+
+/* Typewriter reveal on title */
+.ltp-title-clip {
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.ltp-title {
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-inverse);
+  margin: 0;
+  position: relative;
+  /* Typewriter: reveal from left */
+  animation: ltp-typewriter 1.1s steps(20, end) 0.2s both,
+             ltp-cursor-blink 0.7s step-end 0.2s 3;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid var(--accent-color);
+}
+
+@keyframes ltp-typewriter {
+  from { max-width: 0; }
+  to   { max-width: 100%; }
+}
+@keyframes ltp-cursor-blink {
+  from, to { border-color: transparent; }
+  50%       { border-color: var(--accent-color); }
+}
+/* Remove cursor after animation completes */
+.ltp-title {
+  animation: ltp-typewriter 1.1s steps(20, end) 0.2s both,
+             ltp-cursor-blink 0.7s step-end 0.2s 3,
+             ltp-cursor-hide 0s 2.3s forwards;
+}
+@keyframes ltp-cursor-hide {
+  to { border-color: transparent; }
+}
+
+.ltp-subtitle {
+  font-size: 1.025rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.80);
+  max-width: 420px;
+  margin: 0 0 2.5rem;
+}
+
+/* Animated accent bar */
+.ltp-accent-bar {
+  height: 3px;
+  width: 240px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.ltp-accent-bar__fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-color), rgba(11,122,75,0.4));
+  border-radius: 99px;
+  animation: ltp-bar-grow 1.4s cubic-bezier(0.22, 1, 0.36, 1) 1.2s both;
+  transform-origin: left;
+}
+@keyframes ltp-bar-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ---------- Cards column ---------- */
+.ltp-cards-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+/* ---------- Individual card (with fanned stack) ---------- */
+.ltp-card {
+  position: relative;
+  opacity: 0;
+  animation: ltp-card-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes ltp-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Fanned stack depth layers behind each card */
+.ltp-card-stack {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  pointer-events: none;
+}
+.ltp-card-stack--2 {
+  transform: translateY(8px) translateX(8px) scale(0.97);
+  opacity: 0.5;
+}
+.ltp-card-stack--1 {
+  transform: translateY(4px) translateX(4px) scale(0.985);
+  opacity: 0.7;
+}
+
+/* Glass card body */
+.ltp-card-inner {
+  position: relative;
+  z-index: 2;
+  background: rgba(255,255,255,0.09);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 16px;
+  padding: 1.6rem 1.8rem 1.4rem;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.32s ease,
+              box-shadow 0.32s ease;
+}
+.ltp-card:hover .ltp-card-inner {
+  transform: translateY(-4px) translateX(-2px);
+  background: rgba(255,255,255,0.14);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.22);
+}
+
+/* Slight horizontal offset per card for editorial stagger — use margin to avoid animation conflict */
+.ltp-card--1 { margin-left: 12px; }
+
+@media (max-width: 1024px) {
+  .ltp-card--1 { margin-left: 0; }
+}
+
+/* Card top row: icon + number */
+.ltp-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.ltp-card-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(11,122,75,0.22);
+  border: 1px solid rgba(11,122,75,0.4);
+  color: #4ade9a;
+  flex-shrink: 0;
+  transition: background 0.28s ease, border-color 0.28s ease;
+}
+.ltp-card:hover .ltp-card-icon-wrap {
+  background: rgba(11,122,75,0.35);
+  border-color: rgba(11,122,75,0.65);
+}
+
+.ltp-card-num {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: rgba(255,255,255,0.08);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  user-select: none;
+  transition: color 0.28s ease;
+}
+.ltp-card:hover .ltp-card-num {
+  color: rgba(255,255,255,0.13);
+}
+
+.ltp-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-inverse);
+  margin: 0 0 0.55rem;
+  line-height: 1.3;
+}
+
+.ltp-card-desc {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.75);
+  margin: 0 0 1rem;
+}
+
+/* Card footer CTA */
+.ltp-card-footer {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 0.85rem;
+}
+
+.ltp-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #4ade9a;
+  cursor: pointer;
+  transition: gap 0.22s ease, color 0.22s ease;
+}
+.ltp-card:hover .ltp-card-cta {
+  gap: 0.65rem;
+  color: #6ff0b0;
+}
+
+/* ---------- Slide-in animation for header ---------- */
+@keyframes ltp-slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .ltp-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .ltp-title {
+    white-space: normal;
+    max-width: 100% !important;
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+  .ltp-subtitle {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .ltp-section {
+    padding: 4rem 0 5rem;
+  }
+  .ltp-card-inner {
+    padding: 1.25rem 1.25rem 1.1rem;
+  }
+  .ltp-card-num {
+    font-size: 1.8rem;
+  }
+}

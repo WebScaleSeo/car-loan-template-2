@@ -1,0 +1,447 @@
+/* ============================================
+   FaqCtaBanner — Retro-Modern Fusion
+   LIGHT + GRADIENT background treatment
+   ============================================ */
+
+.faq-cta-banner {
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 0 6rem;
+  background:
+    radial-gradient(ellipse 70% 80% at 15% 40%, rgba(15, 52, 96, 0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 70% at 85% 20%, rgba(11, 122, 75, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 55% 90%, rgba(26, 82, 118, 0.08) 0%, transparent 60%),
+    linear-gradient(135deg, #f0f5ff 0%, #f7f9fc 40%, #eef6f0 100%);
+}
+
+/* Noise / grain texture overlay */
+.faq-cta-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Retro grid lines overlay */
+.faq-cta-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(15, 52, 96, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 52, 96, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---- Gradient mesh blobs ---- */
+.faq-cta-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  animation: orbFloat 8s ease-in-out infinite;
+}
+
+.faq-cta-orb--1 {
+  width: 420px;
+  height: 420px;
+  top: -120px;
+  left: -80px;
+  background: radial-gradient(circle, rgba(15, 52, 96, 0.12) 0%, transparent 70%);
+  animation-delay: 0s;
+}
+
+.faq-cta-orb--2 {
+  width: 340px;
+  height: 340px;
+  bottom: -80px;
+  right: -40px;
+  background: radial-gradient(circle, rgba(11, 122, 75, 0.1) 0%, transparent 70%);
+  animation-delay: -3s;
+}
+
+.faq-cta-orb--3 {
+  width: 200px;
+  height: 200px;
+  top: 30%;
+  right: 15%;
+  background: radial-gradient(circle, rgba(26, 82, 118, 0.09) 0%, transparent 70%);
+  animation-delay: -5s;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-18px) scale(1.04); }
+}
+
+/* ---- Oversized focal "?" ---- */
+.faq-cta-giant-mark {
+  position: absolute;
+  right: 6%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(220px, 28vw, 420px);
+  font-weight: 800;
+  line-height: 1;
+  color: transparent;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 52, 96, 0.08) 0%,
+    rgba(26, 82, 118, 0.05) 50%,
+    rgba(11, 122, 75, 0.06) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  pointer-events: none;
+  z-index: 2;
+  user-select: none;
+  letter-spacing: -0.02em;
+  animation: giantPulse 6s ease-in-out infinite;
+}
+
+@keyframes giantPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ---- Retro accent bar ---- */
+.faq-cta-accent-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+  animation: slideInLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.faq-cta-accent-bar__line {
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  border-radius: 2px;
+}
+
+.faq-cta-accent-bar__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-color);
+}
+
+.faq-cta-accent-bar__label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ---- Content panel (glassmorphism) ---- */
+.faq-cta-panel {
+  position: relative;
+  z-index: 10;
+  max-width: 680px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(15, 52, 96, 0.12);
+  border-radius: 20px;
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(2rem, 5vw, 3.5rem);
+  box-shadow:
+    0 4px 24px rgba(15, 52, 96, 0.08),
+    0 1px 4px rgba(15, 52, 96, 0.05),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+  animation: panelReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+/* Retro left accent on panel */
+.faq-cta-panel::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 24px;
+  bottom: 24px;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+  border-radius: 0 2px 2px 0;
+}
+
+@keyframes panelReveal {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---- Headline with typewriter effect ---- */
+.faq-cta-headline {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+  color: var(--text-primary);
+}
+
+.faq-cta-headline__gradient {
+  display: inline-block;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 45%,
+    var(--accent-color) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Typewriter wrap — decorative shimmer sweep over visible text */
+.faq-cta-typewriter-wrap {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Headline always visible — fade-in entrance */
+.faq-cta-typewriter {
+  display: block;
+  animation: headlineReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+}
+
+/* Retro scanning-line sweeps left→right over the headline once */
+.faq-cta-typewriter-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 100%
+  );
+  animation: scanSweep 1.4s cubic-bezier(0.4, 0, 0.2, 1) 1s both;
+  pointer-events: none;
+}
+
+@keyframes headlineReveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scanSweep {
+  from {
+    transform: translateX(-80px);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateX(calc(100vw + 80px));
+    opacity: 0;
+  }
+}
+
+/* ---- Description text ---- */
+.faq-cta-description {
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0 0 2rem;
+  animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.9s both;
+}
+
+/* ---- CTA Button ---- */
+.faq-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2.2rem;
+  background: var(--primary-color);
+  color: var(--text-inverse);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  border-radius: 50px;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1.1s both;
+  box-shadow: 0 4px 20px rgba(15, 52, 96, 0.3);
+}
+
+.faq-cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.faq-cta-btn::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.faq-cta-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 8px 32px rgba(15, 52, 96, 0.35),
+    0 0 0 4px rgba(15, 52, 96, 0.1);
+  border-color: var(--accent-color);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+}
+
+.faq-cta-btn:hover::before {
+  opacity: 1;
+}
+
+.faq-cta-btn:hover::after {
+  opacity: 1;
+}
+
+.faq-cta-btn__arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  font-size: 1.1em;
+}
+
+.faq-cta-btn:hover .faq-cta-btn__arrow {
+  transform: translateX(4px);
+}
+
+/* ---- Shared entrance animation ---- */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Decorative retro corner marks ---- */
+.faq-cta-corner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.faq-cta-corner--tl {
+  top: 2rem;
+  left: 2rem;
+  border-top: 3px solid rgba(15, 52, 96, 0.18);
+  border-left: 3px solid rgba(15, 52, 96, 0.18);
+  border-radius: 4px 0 0 0;
+  animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+.faq-cta-corner--br {
+  bottom: 2rem;
+  right: 2rem;
+  border-bottom: 3px solid rgba(11, 122, 75, 0.18);
+  border-right: 3px solid rgba(11, 122, 75, 0.18);
+  border-radius: 0 0 4px 0;
+  animation: fadeInUp 0.8s ease 0.5s both;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .faq-cta-giant-mark {
+    right: 2%;
+    font-size: clamp(160px, 22vw, 300px);
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 768px) {
+  .faq-cta-banner {
+    padding: 4rem 0 5rem;
+  }
+
+  .faq-cta-giant-mark {
+    font-size: 180px;
+    right: -20px;
+    top: auto;
+    bottom: -20px;
+    transform: none;
+    opacity: 0.5;
+  }
+
+  .faq-cta-panel {
+    padding: 2rem 1.75rem;
+  }
+
+  .faq-cta-corner {
+    width: 40px;
+    height: 40px;
+  }
+
+  .faq-cta-corner--tl {
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .faq-cta-corner--br {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-cta-typewriter {
+    animation: headlineReveal 0.6s ease 0.3s both;
+  }
+  .faq-cta-typewriter-wrap::after {
+    display: none;
+  }
+
+  .faq-cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

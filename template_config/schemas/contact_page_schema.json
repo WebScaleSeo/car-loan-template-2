@@ -1,0 +1,198 @@
+{
+  "name": "generate_contact_page",
+  "description": "Generate complete contact page content",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "seo": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 60
+          },
+          "metaDescription": {
+            "type": "string",
+            "minLength": 50,
+            "maxLength": 160
+          }
+        },
+        "required": [
+          "title",
+          "metaDescription"
+        ]
+      },
+      "componentOrder": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "contactHero",
+            "contactForm",
+            "contactFaqPreview",
+            "contactCtaBanner"
+          ]
+        },
+        "minItems": 4,
+        "maxItems": 4
+      },
+      "sections": {
+        "type": "object",
+        "properties": {
+          "contactHero": {
+            "type": "object",
+            "properties": {
+              "headline": {
+                "type": "string",
+                "description": "Page headline, e.g. 'Get in Touch'"
+              },
+              "subtitle": {
+                "type": "string",
+                "description": "Brief supporting text about reaching out, 1-2 sentences"
+              }
+            },
+            "required": [
+              "headline",
+              "subtitle"
+            ]
+          },
+          "contactForm": {
+            "type": "object",
+            "properties": {
+              "formTitle": {
+                "type": "string",
+                "description": "Form heading, e.g. 'Send Us a Message'"
+              },
+              "formDescription": {
+                "type": "string",
+                "description": "Brief instruction text above the form, 1 sentence"
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "fieldName": {
+                      "type": "string",
+                      "description": "Technical field name, e.g. 'fullName', 'email'"
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Display label, e.g. 'Full Name'"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Input type: text, email, tel, or textarea"
+                    },
+                    "placeholder": {
+                      "type": "string",
+                      "description": "Placeholder text for the field"
+                    }
+                  },
+                  "required": [
+                    "fieldName",
+                    "label",
+                    "type",
+                    "placeholder"
+                  ]
+                }
+              },
+              "submitButtonLabel": {
+                "type": "string",
+                "description": "Submit button text, e.g. 'Send Message'"
+              }
+            },
+            "required": [
+              "formTitle",
+              "formDescription",
+              "fields",
+              "submitButtonLabel"
+            ]
+          },
+          "contactFaqPreview": {
+            "type": "object",
+            "properties": {
+              "sectionTitle": {
+                "type": "string",
+                "description": "Heading, e.g. 'Common Questions'"
+              },
+              "questions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "question": {
+                      "type": "string",
+                      "description": "A common question"
+                    },
+                    "answer": {
+                      "type": "string",
+                      "description": "Brief answer, 1-2 sentences"
+                    }
+                  },
+                  "required": [
+                    "question",
+                    "answer"
+                  ]
+                }
+              },
+              "linkLabel": {
+                "type": "string",
+                "description": "Link text to full FAQ page, e.g. 'View All FAQs'"
+              },
+              "linkUrl": {
+                "type": "string",
+                "description": "URL to FAQ page, must be /faq"
+              }
+            },
+            "required": [
+              "sectionTitle",
+              "questions",
+              "linkLabel",
+              "linkUrl"
+            ]
+          },
+          "contactCtaBanner": {
+            "type": "object",
+            "properties": {
+              "headline": {
+                "type": "string",
+                "description": "Reassuring headline, e.g. 'We're Here to Help'"
+              },
+              "description": {
+                "type": "string",
+                "description": "Brief closing message, 1-2 sentences"
+              },
+              "ctaButtonLabel": {
+                "type": "string",
+                "description": "Button text, e.g. 'Back to Home'"
+              },
+              "ctaButtonUrl": {
+                "type": "string",
+                "description": "URL for the CTA, must be /"
+              }
+            },
+            "required": [
+              "headline",
+              "description",
+              "ctaButtonLabel",
+              "ctaButtonUrl"
+            ]
+          }
+        },
+        "required": [
+          "contactHero",
+          "contactForm",
+          "contactFaqPreview",
+          "contactCtaBanner"
+        ]
+      }
+    },
+    "required": [
+      "seo",
+      "componentOrder",
+      "sections"
+    ]
+  }
+}

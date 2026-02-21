@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import HeroSection from '../components/HeroSection';
+import BenefitsOverview from '../components/BenefitsOverview';
+import HowItWorks from '../components/HowItWorks';
+import LoanTypesPreview from '../components/LoanTypesPreview';
+import TestimonialHighlight from '../components/TestimonialHighlight';
+import CtaBanner from '../components/CtaBanner';
+
+import siteConfig from '../../siteConfig.json';
+import cloudflareConfig from '../../cloudflareConfig.json';
+const { global, pages } = siteConfig.site;
+const pageData = pages.home;
+const seo = { title: pageData.seo.title, metaDescription: pageData.seo.metaDescription };
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": seo.title,
+  "description": seo.metaDescription
+})}></script>
+
+
+<Layout seo={seo} canonicalPath="/">
+  <Header navigation={global.navigation} branding={global.branding} />
+  <main>
+    <HeroSection data={pageData.sections.heroSection} client:load />
+    <BenefitsOverview data={pageData.sections.benefitsOverview} client:load />
+    <HowItWorks data={pageData.sections.howItWorks} client:load />
+    <LoanTypesPreview data={pageData.sections.loanTypesPreview} client:load />
+    <TestimonialHighlight data={pageData.sections.testimonialHighlight} client:load />
+    <CtaBanner data={pageData.sections.ctaBanner} client:load />
+  </main>
+  <Footer footer={global.footer} />
+</Layout>
